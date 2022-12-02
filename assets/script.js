@@ -88,9 +88,37 @@ var upperCasedCharacters = [
   'Z'
 ];
 
+const userInput = {
+  passwordLength: 1,
+  lowercase: true,
+  uppercase: true,
+  numeric: true,
+  special: true
+};
+
 // Function to prompt user for password options
 function getPasswordOptions() {
+  do {
+    var passwordLength = prompt("How many characters would you like your password to contain?");
+    var isNumber = isNaN(passwordLength);
 
+    !isNumber && console.log(passwordLength);
+  }
+  while (isNumber);
+
+  if (passwordLength < 10) {
+    alert("Password length must be at least 10 characters.");
+    getPasswordOptions();
+  } else if (passwordLength > 64) {
+    alert("Password length must be equal or less than 64 characters.")
+    getPasswordOptions();
+  } else {
+    userInput.passwordLength = passwordLength;
+    userInput.lowercase = confirm("Would you like your password to contain lowercase characters?");
+    userInput.uppercase = confirm("Would you like your password to contain uppercase characters?");
+    userInput.numeric = confirm("Would you like your password to contain numeric characters?");
+    userInput.specia = confirm("Would you like your password to contain special characters?");
+  }
 }
 
 // Function for getting a random element from an array
